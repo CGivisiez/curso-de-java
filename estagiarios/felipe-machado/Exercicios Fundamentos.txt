@@ -1,0 +1,59 @@
+
+Crie um pacote chamado parte1 dentro de um pacote chamado fundamentos e crie classes separadas dentro dele para cada um dos cinco primeiros exercícios.
+
+1) Escreva um programa que mostre uma mensagem de boas vindas composta pelo seu nome e sobrenome.
+
+public class BoasVindas{
+	public static void main (String[] args){
+		System.out.println ("Bem vindo Felipe Machado !!");
+	}
+}
+
+2) Escreva um programa que recebe o nome do usuário e mostra uma mensagem de boas vindas baseada nesse nome. Para receber valores na linha de comando você pode usar a classe Scanner.
+
+public class BoasVindas{
+	public static void main (String[] args){
+		System.out.println("Entre com o nome:");
+		Scanner s = new Scanner(System.in);
+		String nome = s.nextLine();
+		System.out.println ("Bem vindo " +nome+ " !!");			
+	}
+}
+
+
+3) Qual será o valor impresso na tela após o término da execução do código abaixo (procure responder esta questão sem executar o código no editor):
+
+public class Exercicio_3 {
+  public static void main(String[] args) {
+    int a = 10;        
+    int b = a++; // Dica: acontece depois da soma
+    int c = ++b; // Dica: acontece antes da soma
+    System.out.println(a + b + c);
+  }
+}
+
+a = 11
+b = 11
+c = 11
+
+4) Escreva um programa que calcule e escreva o perímetro de uma circunferência, sendo pedido ao usuário o tamanho do raio. Dica: perímetro = 2 x PI x raio.
+
+mport java.util.Scanner;
+
+public class CalculaRaiz{
+	
+	public static void main (String[] args){
+		final double PI = 3.14;
+		System.out.println("Entre com o raio:");
+		Scanner s = new Scanner(System.in);
+		double raio = s.nextDouble();
+		double perimetro = 2 * PI * raio;
+		System.out.println ("O perímetro é "+ perimetro);			
+	}
+}
+
+
+5) Escreva um programa que calcula a hipotenusa de um triângulo retângulo a partir do tamanho dos catetos. Dica: quadrado da hipotenusa = soma dos quadrados dos catetos. Use o método "Math.sqrt(double valor)" da biblioteca de matemática do Java para obter a raiz quadrada de um número.
+
+
+
