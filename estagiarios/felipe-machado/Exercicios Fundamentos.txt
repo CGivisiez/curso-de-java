@@ -55,5 +55,19 @@ public class CalculaRaiz{
 
 5) Escreva um programa que calcula a hipotenusa de um triângulo retângulo a partir do tamanho dos catetos. Dica: quadrado da hipotenusa = soma dos quadrados dos catetos. Use o método "Math.sqrt(double valor)" da biblioteca de matemática do Java para obter a raiz quadrada de um número.
 
-
+public class Hipotenusa{
+	
+	public static void main (String[] args){
+		
+		Scanner s = new Scanner(System.in);	
+		
+		System.out.println("Entre com o valor do 1º cateto:");
+		double cateto1 = s.nextDouble();
+		System.out.println("Entre com o valor do 2º cateto:");
+		double cateto2 = s.nextDouble();
+		double hipotenusa = Math.sqrt( Math.pow(cateto1,2) + Math.pow(cateto2,2));
+		System.out.println("A hipotenusa é = "+hipotenusa);
+		
+	}
+}
 
