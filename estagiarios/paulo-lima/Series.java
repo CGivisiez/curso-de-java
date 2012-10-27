@@ -29,7 +29,6 @@ public class Series {
     public void escreveNoArquivo(String nome) throws Exception {
         FileWriter arquivo = new FileWriter(nome);
         BufferedWriter buffered = new BufferedWriter(arquivo);
-        int cont =0; // contador para nao imprimir linha em branco no arquivo
         for (int i = 0; i < seriesFavoritas.length; i++) {
             if(i==seriesFavoritas.length-1){
                 buffered.write(seriesFavoritas[i]);
