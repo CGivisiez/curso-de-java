@@ -76,3 +76,6 @@ e) int[] a = {1, 2, 3, 4};
 f) int a = {1, 2, 3, 4};    <-
 
 10- Passe através de linha de comando para um método public static void main quatro números e imprima na tela a soma desses números: (Dica: use Integer.parseInt para converter de String para int cada valor recebido)
+
+
+
