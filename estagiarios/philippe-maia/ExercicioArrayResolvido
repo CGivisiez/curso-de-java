@@ -1,0 +1,96 @@
+Exercícios - Arrays
+
+1- Declare e construa um array 2 x 4 de inteiros
+
+int[][] matriz = new int[2][4];
+
+2- Cite duas formas de se declarar um array
+
+int[] numeros;
+int numeros[];
+
+3- Percorra com um (ou mais) laço(s) for o array criado no exercício 1 e preencha cada posição do mesmo com a soma do índice da linha com o índice da coluna
+
+for(int i = 0; i<2; i++){
+    for(int j = 0; j<4; j++){
+	matriz[i][j] = i + j;
+    }
+}
+
+4- Qual o valor padrão dos tipos abaixo?
+
+a) int e long: 0
+b) double e float: 0
+c) boolean: false
+d) referências para objetos: null
+
+5- Declare, construa e inicialize um array de inteiros unidimensional de 5 posições com os valores 1, 2, 3, 4 e 5 usando apenas uma linha de código
+
+int[] numeros = {1,2,3,4,5};//Exercicio5
+
+6- Crie uma classe chamada Pessoa com o atributo privado nome, um atributo privado sobrenome e um construtor público que recebe como parâmetro um nome e sobrenome e configura os atributos. Crie também um método de acesso público que retorne a concatenação de nome e sobrenome. Dê um nome coerente para esse método. Obs.: Apenas os métodos e atributos citados devem ser criados
+
+//Exercicio 6
+public class Pessoa{
+	
+	private String nome;
+	private String sobrenome;
+
+	public Pessoa(String nome,String sobrenome){
+		this.nome = nome;
+		this.sobreNome = sobrenome;
+	}
+
+	@Override
+	public String toString(){
+		return nome + "," + sobrenome;	
+	}
+
+}
+
+
+7- Crie e preencha um array unidimensional de 4 posições com objetos do tipo Pessoa
+
+Pessoa pessoa[] = new Pessoa[4];
+
+8- Percorra o array criado no exercício anterior e imprima na tela com System.out.println a chamada ao método público que você criou em Pessoa para cada instância no array
+
+for(int i = 0; i<pessoa.length;i++){
+	System.out.println(pessoa);
+}
+
+
+9- Quais declarações de array estão incorretas?
+
+a) int[] a = 22;          (X)
+b) int[] a = [22];        (X)
+c) int[22] a;             (X)
+d) int a[] = new int[22]; ( )
+e) int[] a = {1, 2, 3, 4};( )
+f) int a = {1, 2, 3, 4};  (X)
+
+10- Passe através de linha de comando para um método public static void main quatro números e imprima na tela a soma desses números: (Dica: use Integer.parseInt para converter de String para int cada valor recebido)
+
+//Exercicio10
+public class QuatroNumeros {
+
+	public static void main(String[] args) {
+		
+		String numero1 = "1";
+		String numero2 = "2";
+		String numero3 = "3";
+		String numero4 = "4";
+		
+		int number1 = Integer.parseInt(numero1);
+		int number2 = Integer.parseInt(numero2);
+		int number3 = Integer.parseInt(numero3);
+		int number4 = Integer.parseInt(numero4);
+		
+		int soma = 0;
+		
+		soma = number1 + number2 + number3 + number4;
+		
+		System.out.println(soma);
+	}
+}
+
