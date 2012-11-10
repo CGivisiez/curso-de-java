@@ -1,0 +1,261 @@
+1 - Gere todos os números entre 1 e 1000 e ordene em ordem decrescente utilizando um TreeSet.
+
+package br.com.exercicioscolecoes;
+
+import java.util.*;
+public class ExercicioColecoesUm {
+	
+	public ExercicioColecoesUm(){
+		
+		TreeSet<Integer> tree = new TreeSet<Integer>();
+		for (int i = 0; i<1001; i++){
+			tree.add(i);
+		}
+		System.out.println(tree.descendingSet());
+	}
+
+	public static void main(String[] args){
+		new ExercicioColecoesUm();
+	}
+}
+
+2 - Crie uma classe Lembrete com um atributo List<String> tarefas. Em um método main, crie um mapa cujas chaves serão os dias da semana (String) e os valores serão objetos da classe Lembrete. Escreva algum código demonstrando a estrutura criada.
+
+package br.com.exercicioscolecoes;
+
+import java.util.*;
+
+public class Lembrete {
+
+	public List<String> tarefas;
+
+	public Lembrete() {
+		tarefas = new ArrayList<String>();
+
+	}
+
+	@Override
+	public String toString() {
+		return "Lembrete tarefas=" + tarefas;
+	}
+
+	public static void main(String[] args) {
+		Map<String, Lembrete> fazeres = new HashMap<String, Lembrete>();
+
+		Lembrete lembrar1 = new Lembrete();
+		lembrar1.tarefas.add(0, "acordar");
+		lembrar1.tarefas.add(1, "bateriar");
+		lembrar1.tarefas.add(2, "nadar");
+		lembrar1.tarefas.add(3, "estudar");
+
+		Lembrete lembrar2 = new Lembrete();
+		 
+		lembrar2.tarefas.add(0, "Acordar" );
+		lembrar2.tarefas.add(1, "ler use a cabeça");
+		lembrar2.tarefas.add(2, "programar em sonho com python");
+		lembrar2.tarefas.add(3, "bateriar");
+
+		fazeres.put("Domingo", lembrar1);
+		fazeres.put("Segunda", lembrar2);
+
+		Scanner teclado = new Scanner(System.in);
+		String diaDaSemana = teclado.nextLine();
+		
+		if (diaDaSemana.equals("Domingo")) {
+
+			System.out.println(fazeres.get("Domingo"));
+		}else if(diaDaSemana.equals("Segunda")){
+				System.out.println(fazeres.get("Segunda"));
+				}
+		
+
+	}
+}
+
+3 - Implemente um programa que receberá do usuário duas relações de números inteiros positivos e um caractere representando uma das seguintes operações:
++ união
+* interseção
+
+O programa deve retornar o resultado da operação sobre os dois grupos de números. 
+
+package br.com.exercicioscolecoes;
+
+import java.util.*;
+
+public class ExercicioColecaoTres {
+
+	public static void main(String[] args) {
+
+		List<Integer> pegaNumerosUm = new ArrayList<Integer>();
+		List<Integer> pegaNumerosDois = new ArrayList<Integer>();
+		TreeSet<Integer> conjuntoNumeros = new TreeSet<Integer>();
+		Iterator<Integer> it = conjuntoNumeros.iterator();
+
+		System.out.println("entre com numeros para o conjunto um.");
+
+		for (int i = 0; i < 5; i++) {
+
+			Scanner teclado = new Scanner(System.in);
+			pegaNumerosUm.add(teclado.nextInt());
+
+		}
+
+		System.out.println("entre com numeros para o conjunto dois.");
+
+		for (int i = 0; i < 5; i++) {
+
+			Scanner teclado = new Scanner(System.in);
+			pegaNumerosDois.add(teclado.nextInt());
+
+		}
+
+		System.out.println("entre com * para interscecao ou + para uniao");
+
+		Scanner teclado = new Scanner(System.in);
+		String operador = teclado.nextLine();
+		//Uniao;
+		if (operador.equals("+")) {
+
+			conjuntoNumeros.addAll(pegaNumerosUm);
+			conjuntoNumeros.addAll(pegaNumerosDois);
+			System.out.println(conjuntoNumeros);
+		//Interscecao;
+		} else if (operador.equals("*")) {
+			for (int correArray = 0; correArray < pegaNumerosUm.size(); correArray++) {
+				for (int correDeTras = pegaNumerosDois.size(); correDeTras > 0; correDeTras--) {
+					boolean numeroInterscecao = pegaNumerosUm.get(correArray).equals(
+							pegaNumerosDois.get(correDeTras-1));
+					System.out.println(numeroInterscecao);
+					if (numeroInterscecao) {
+						conjuntoNumeros.add(pegaNumerosUm.get(correArray));
+					}
+				}
+			}
+			System.out.println(conjuntoNumeros);
+
+		}
+
+	}
+
+}
+
+4 - Implemente um programa para medir o tempo de execução de algumas classes da API de collections (pelo menos 4 delas) no que diz respeito a adicionar e percorrer elementos. Receba do usuário a quantidade de elementos que serão inseridos. Dica: Use System.currentTimeMillis() para pegar o tempo atual em milissegundos.
+
+
+
+package br.com.exercicioscolecoes;
+
+import java.util.*;
+
+public class ExercicioColecoesQuatro {
+
+	public static void main(String[] args) {
+		
+		long tamanhoTree = 0;
+		long tamanhoHash = 0;
+		long tamanhoList = 0;
+		long tamanhoLinked = 0;
+		
+		Set<Integer> tree = new TreeSet<Integer>();
+		Set<Integer> hash = new HashSet<Integer>();
+		List<Integer> list = new ArrayList<Integer>();
+		List<Integer> linked = new LinkedList<Integer>();
+
+		System.out.println("Entre com o tamanho do tree");
+
+		Scanner tecladoTree = new Scanner(System.in);
+		tamanhoTree = tecladoTree.nextLong();
+		
+		double pegaTempo = System.currentTimeMillis();
+		
+		for (int i = 0; i < tamanhoTree; i++) {
+			tree.add(i);
+		}
+
+		double pegaFimTempo = System.currentTimeMillis();
+		System.out.println("tempo pra add: " + (pegaFimTempo - pegaTempo) / 3600);
+	
+		
+		pegaTempo = System.currentTimeMillis();
+		
+		for(Integer percorreTree : tree){
+				
+		}
+		
+		pegaFimTempo = System.currentTimeMillis();
+		
+		System.out.println("tempo pra percorrer: " + (pegaFimTempo - pegaTempo) / 3600);
+		
+		//comeco hash
+		System.out.println("Entre com o tamanho do hash");
+		
+		Scanner tecladoHash = new Scanner(System.in);
+		tamanhoHash = tecladoHash.nextLong();
+		
+		pegaTempo = System.currentTimeMillis();
+		
+		for (int i = 0; i < tamanhoHash; i++) {
+			hash.add(i);
+		}
+
+		pegaFimTempo = System.currentTimeMillis();
+		System.out.println("tempo pra add: " + (pegaFimTempo - pegaTempo) / 3600);
+	
+		pegaTempo = System.currentTimeMillis();
+		
+		for(Integer percorreHash : hash){
+				
+		}
+		
+		pegaFimTempo = System.currentTimeMillis();
+		
+		System.out.println("tempo pra percorrer: " + (pegaFimTempo - pegaTempo) / 3600);
+		
+		//começo arraylist
+		System.out.println("Entre com o tamanho da ArrayList");
+		
+		Scanner tecladoList = new Scanner(System.in);
+		tamanhoList = tecladoList.nextLong();
+		pegaTempo = System.currentTimeMillis();
+		
+		for (int i = 0; i < tamanhoList; i++) {
+			list.add(i);
+		}
+		
+		pegaFimTempo = System.currentTimeMillis();
+		System.out.println("tempo pra add: " + (pegaFimTempo - pegaTempo) / 3600);
+
+		pegaTempo = System.currentTimeMillis();
+		
+		for(Integer percorreList : list){
+				
+		}
+		
+		pegaFimTempo = System.currentTimeMillis();
+		System.out.println("tempo pra percorrer: " + (pegaFimTempo - pegaTempo) / 3600);
+		
+		//comecoLinked
+		System.out.println("Entre com o tamanho da Linked lista");
+		
+		
+		Scanner tecladoLinked = new Scanner(System.in);
+		tamanhoLinked = tecladoLinked.nextLong();
+		pegaTempo = System.currentTimeMillis();
+		
+		for (int i = 0; i < tamanhoLinked; i++) {
+			linked.add(i);
+		}
+		
+		pegaFimTempo = System.currentTimeMillis();
+		System.out.println("tempo pra add: " + (pegaFimTempo - pegaTempo) / 3600);
+
+		pegaTempo = System.currentTimeMillis();
+		
+		for(Integer percorreLinked : linked){
+				
+		}
+		
+		pegaFimTempo = System.currentTimeMillis();
+		System.out.println("tempo pra percorrer: " + (pegaFimTempo - pegaTempo) / 3600);
+	}
+}

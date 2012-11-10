@@ -1,0 +1,289 @@
+1 - Crie a classe Carga com o atributo double peso. Ela terá um construtor e um método setter para o peso. Valide o peso (peso > 0) antes de jogar no atributo e caso seja inválido lance a exceção IllegalArgumentException do pacote lang.
+
+package exercicio.colecoes;
+
+import java.util.*;
+
+public class ExercicioColecao1 {
+
+    public static void main(String[] args) {
+        TreeSet<Integer> numerosDecre = new TreeSet<Integer>();
+        int i = 0;
+        for (i = 0; i < 1001; i++) {
+            numerosDecre.add(i);
+        }
+        System.out.println(numerosDecre.descendingSet());
+    }
+}
+
+2 - Crie um pacote produtos. Dentro dele crie a classe Produto com os atributos codigo (Integer), descricao (String) e preco (BigDecimal). Crie para ela os métodos equals e hashCode (baseados no codigo), e faça com que implemente Comparable<Produto> baseando o compareTo na descrição. Sobrescreva também o método toString. Crie uma classe BuscaProdutos com um atributo TreeSet de produtos e com os métodos obterProduto(Integer codigo), exibirProdutos() e cargaInicial(). O método carga inicial será chamado para inicializar o treeset com alguns produtos. Crie uma exceção chamada ProdutoNaoEncontradoException que será lançada quando obterProduto não encontrar o produto referente ao código informado. Crie um método main para testar tudo que foi feito.
+
+CLASSE PRODUTO
+
+package Produtos;
+
+import java.math.BigDecimal;
+
+public class Produto implements Comparable<Produto>{
+	public Integer codigo;
+	public String descricao;
+	public BigDecimal preco;
+	
+	public Produto(Integer codigo, String descricao, String preco){
+		
+		this.descricao = descricao;
+		this.preco = new BigDecimal(preco);
+		this.codigo = new Integer(codigo);
+		
+	}
+	
+	public Integer getCodigo(){
+		
+		return this.codigo;
+	}
+	
+	public int HashCode(){
+		int hash = 7;
+		hash = 23 * hash + (this.codigo!=null ? this.codigo.hashCode() : 0);
+		
+		return hash;
+	}
+	
+	public boolean equals(Object object){
+		if(object==null){
+			return false;
+		}
+		if(getClass() != object.getClass()){
+			return false;
+		}
+		final Produto novo = (Produto) object;
+		if((this.codigo == null) ? (novo.codigo !=null) : ! this.codigo.equals(novo.codigo)){
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public int compareTo(Produto produtoOutro) {
+		
+		if(this.descricao.length() < produtoOutro.descricao.length()){
+			return -1;
+		}
+		if(this.descricao.length() > produtoOutro.descricao.length()){
+			return 1;
+		}
+		return 0;
+	}
+	
+	
+	@Override 
+	public String toString() {
+		return "Produto codigo=" + codigo + ", descricao=" + descricao + ", preco=" + preco;  	
+	}
+	
+	public static void main(String[] args){
+		
+		BuscaProdutos buscaProduto = new BuscaProdutos();
+		Integer numeroCodigo = new Integer(2);
+		
+		buscaProduto.cargaInicial();
+		System.out.println(buscaProduto.obterProdutos(numeroCodigo));
+		buscaProduto.exibirProdutos();
+	}
+	
+}
+
+CLASSE BUSCAPRODUTOS
+
+package Produtos;
+
+import java.math.BigDecimal;
+import java.util.TreeSet;
+
+
+public class BuscaProdutos {
+	
+	TreeSet<Produto> treeProdutos = new TreeSet<Produto>();
+	
+	public Produto obterProdutos(Integer codigo){
+		for(Produto produto : treeProdutos){
+				if(produto.getCodigo().equals(codigo)){
+					return produto;
+				}
+				
+			}
+		throw new ProdutoNaoEncontradoException();
+		
+	}
+	
+	public void cargaInicial(){
+		
+		Produto produto = new Produto(0,"cafe","3.24");
+		Produto produtoUm = new Produto(2,"leite","2.45");
+		Produto produtoDois = new Produto(3,"Coca-La","5.00");
+		
+		treeProdutos.add(produto);
+		treeProdutos.add(produtoUm);
+		treeProdutos.add(produtoDois);
+	
+	}
+	
+	public void exibirProdutos(){
+		
+		System.out.println(treeProdutos.toString());
+	}
+}
+
+CLASSE PRODUTONAOENCONTRADOEXCEPTION
+
+package Produtos;
+
+public class ProdutoNaoEncontradoException extends RuntimeException {
+	
+    public ProdutoNaoEncontradoException(){
+    	
+    	new RuntimeException(getMessage()); 
+    	
+    }
+	
+}
+
+3 - Abra um arquivo chamado series.tv em qualquer diretório e escreva o nome de suas 5 séries favoritas nele (uma por linha). Encerre o fluxo de escrita. Abra o arquivo e leia o conteúdo exibindo-o na saída. Encerre o fluxo de leitura.
+
+
+package br.com.exercicioslistafinal;
+
+import java.io.*;
+
+public class Io {
+
+	public static void escrevendoArquivo()throws IOException {
+		
+		OutputStream outPut = new FileOutputStream("series.tv");
+		OutputStreamWriter outputWriter = new OutputStreamWriter(outPut);
+		BufferedWriter bufferedWriter = new BufferedWriter(outputWriter);
+		bufferedWriter.write(" The Big Bang Theory" + "\r\n");
+		bufferedWriter.write(" ultraman" + "\r\n");// (\r\n)< funciona no windows
+		// bufferedwriter.newLine();tambem posso usar tal metodo.
+		bufferedWriter.write(" South Park" + "\r\n");
+		bufferedWriter.write(" Two and a half man" + "\r\n");
+		bufferedWriter.write(" House" + "\r\n");
+
+		bufferedWriter.close();
+
+	}
+	
+	public static void lendoArquivo() throws IOException{
+	
+		InputStream input = new FileInputStream("series.tv");
+		InputStreamReader reader = new InputStreamReader(input);
+		BufferedReader buffRead = new BufferedReader(reader);
+		String pegaLine;
+		try {
+			while ((pegaLine = buffRead.readLine()) != null) {
+				System.out.println(pegaLine);
+			}
+		} catch (IOException e) {
+			e.getMessage();
+		} finally {
+			buffRead.close();
+		}
+		 
+	}
+	
+	public static void main(String[] args) throws IOException{
+	
+		Io.escrevendoArquivo();
+		Io.lendoArquivo();
+		
+	}
+}		
+
+4 - Crie um programa que recebe do usuário uma url e exibe os headers devolvidos após submeter a url. As linhas abaixo realizam a conexão e devolvem os headers:
+
+URL url = new URL("http://www.google.com");
+URLConnection conexao = url.openConnection();
+Map<String, List<String>> headers = conexao.getHeaderFields();
+
+Percorra os headers através de suas chaves no mapa e exiba os valores. Capture as exceções que podem vir a ocorrer e exiba o retorno do método getMessage() da exceção.
+
+
+package br.com.exercicioslistafinal;
+
+import java.util.List;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.Map;
+import java.util.Scanner;
+
+
+public class RecebeUrl {
+	
+	public static void main(String[] args) throws IOException{
+		Scanner teclado = new Scanner(System.in);
+		String pegaUrl= teclado.nextLine();
+		
+		try {
+			URL url = new URL(pegaUrl);
+			URLConnection conexao = url.openConnection(); 
+			Map<String, List<String>> headers = conexao.getHeaderFields();
+			System.out.println(headers.toString());
+
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	
+
+}
+
+
+Obs.: Substitua no exercício 4 as chamadas a Scanner por javax.swing.JOptionPane.showInputDialog e os printlns por javax.swing.JOptionPane.showMessageDialog para interagir graficamente com o programa.
+
+package br.com.exercicioslistafinal;
+
+import java.util.List;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.Map;
+import javax.swing.*;
+import javax.swing.text.html.HTMLDocument.Iterator;
+
+
+public class RecebeUrl {
+	
+	public static void main(String[] args) throws IOException{
+		
+		String pegaUrl = javax.swing.JOptionPane.showInputDialog("digite o site");
+		
+		try {
+			URL url = new URL(pegaUrl);
+			URLConnection conexao = url.openConnection(); 
+			Map<String, List<String>> headers = conexao.getHeaderFields();
+			
+			javax.swing.JOptionPane.showMessageDialog(null, headers);
+
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+
+}
+
+5 - Empacote o programa do exercício 4 num arquivo .jar executável. Dica: É preciso indicar qual classe é o ponto de entrada para execução do jar. Consulte a ajuda do utilitário jar com o comando jar --help
+aqui eu estava dentro de br.com se nao me engano
+
+jar cvf Exercicioolistafinal.jar exercicioslistafinal/*;
+
+
+
